@@ -10,7 +10,6 @@ const contactSchema = Schema(
     email: {
       type: String,
       required: [true, "Set email for contact"],
-      
     },
     phone: {
       type: String,
@@ -19,6 +18,11 @@ const contactSchema = Schema(
     favorite: {
       type: Boolean,
       default: false,
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
     },
   },
   { versionKey: false, timestamps: true }
@@ -41,7 +45,7 @@ const updateFavoriteSchema = Joi.object({
   "any.required": "missing field favorite",
 });
 
-const schemas = { addContactsSchema, updateFavoriteSchema };
-const Contact = model("contacts", contactSchema);
+const contactSchemas = { addContactsSchema, updateFavoriteSchema };
+const Contact = model("contact", contactSchema);
 
-module.exports = { Contact, schemas };
+module.exports = { Contact, contactSchemas };
