@@ -15,6 +15,7 @@ const updateAvatar = async (req, res) => {
       "avatars",
       uniqName
     );
+    await fs.rename(tmpUpload, resultUpload);
     const img = await jimp.read(tmpUpload);
     await img
       .autocrop()
@@ -24,8 +25,6 @@ const updateAvatar = async (req, res) => {
         jimp.HORIZONTAL_ALIGN_CENTER || jimp.VERTICAL_ALIGN_MIDDLE
       )
       .writeAsync(tmpUpload);
-
-    await fs.rename(tmpUpload, resultUpload);
     const avatarURL = path.join("public", "avatars", uniqName);
     await User.findByIdAndUpdate(id, { avatarURL });
     res.json({ avatarURL });
