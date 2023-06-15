@@ -4,27 +4,26 @@ const jwt = require("jsonwebtoken");
 require('dotenv').config()
 
 const { SECRET_KEY } = process.env;
-console.log(SECRET_KEY);
 
 const auth = async (req, _, next) => {
   const { authorization = ""} = req.headers;
   const [bearer, token] = authorization.split(" ");
-  console.log(token);
   
   try {
     if (bearer !== "Bearer") {
       throw new Unauthorized("Not authorized");
     }
     const { id } = jwt.verify(token, SECRET_KEY);
-    console.log(token);
     const user = await User.findById(id);
     if (!user || !user.token) {
       throw new Unauthorized("Not authorized");
     }
-    req.user = user;
+    req.user = {
+      id,
+      ...user,
+    };
     next();
   } catch (error) {
-    console.log(error);
     if (error.message === "Invalid sugnature") {
       error.status = 401;
     }

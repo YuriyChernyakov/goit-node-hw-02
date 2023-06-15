@@ -16,7 +16,7 @@ const contactValidation = Joi.object({
 
   phone: Joi.string()
     .trim()
-    .pattern(/^\W+\d{3}\W+\s\d+-*\d*$/)
+    .pattern(/^(\+3|)[0-9]{10,11}$/)
     .messages({
       "string.pattern.base":
         "The phone number should contain a country code and a number: (xxx) xxx-xxx",
