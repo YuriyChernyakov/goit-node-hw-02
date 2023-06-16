@@ -5,7 +5,7 @@ const updateFavorite = async (req, res) => {
   const { contactId } = req.params;
   const { favorite } = req.body;
 
-  const updatedСontact = await Contact.findByIdAndUpdate(
+  const updatedСontact = await Contacts.findByIdAndUpdate(
     contactId,
     { favorite },
     {
