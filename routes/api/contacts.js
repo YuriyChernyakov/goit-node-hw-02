@@ -16,7 +16,6 @@ router.delete("/:contactId", isValidId, ctrlWrapper(ctrl.deleteContactByIdCtrl))
 
 router.put("/:contactId", validation(contactSchemas.addContactsSchema), isValidId, ctrlWrapper(ctrl.uptadeContactByIdCtrl));
 
-
 router.patch(
   "/:contactId/favorite",
   isValidId,

@@ -1,7 +1,7 @@
 const { getContactById } = require("../../services");
 
 const getContactByIdCtrl = async (req, res) => {
-  const { id: owner } = req.user;
+  const { _id: owner } = req.user;
   const { contactId: id } = req.params;
 
   const contact = await getContactById(id, owner);

@@ -1,6 +1,7 @@
 const { User } = require("../models");
 const { Unauthorized } = require("http-errors");
 const jwt = require("jsonwebtoken");
+require('dotenv').config()
 
 const { SECRET_KEY } = process.env;
 
@@ -17,7 +18,10 @@ const auth = async (req, _, next) => {
     if (!user || !user.token) {
       throw new Unauthorized("Not authorized");
     }
-    req.user = user;
+    req.user = {
+      id,
+      ...user,
+    };
     next();
   } catch (error) {
     if (error.message === "Invalid sugnature") {

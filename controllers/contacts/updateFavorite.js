@@ -1,5 +1,5 @@
 const createError = require("http-errors");
-const { Contact } = require("../../models");
+const { Contacts } = require("../../models");
 
 const updateFavorite = async (req, res) => {
   const { contactId } = req.params;

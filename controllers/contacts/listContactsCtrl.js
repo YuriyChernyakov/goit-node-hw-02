@@ -1,7 +1,7 @@
 const { listContacts } = require("../../services");
 
 const listContactsCtrl = async (req, res) => {
-  const { id: owner } = req.user;
+  const { _id: owner } = req.user;
   const { page, limit, favorite } = req.query;
 
   const skip = limit * (page - 1);
