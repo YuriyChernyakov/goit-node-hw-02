@@ -3,7 +3,10 @@ const { NotFound } = require("http-errors");
 
 const verifyEmail = async (req, res) => {
   const { verificationToken } = req.params;
-  const user = await User.findOne({ verificationToken });
+
+  console.log('req', req);
+
+  const user = await User.findOne({ token: verificationToken });
   if (!user) {
     throw new NotFound("Not found verification token");
   }
