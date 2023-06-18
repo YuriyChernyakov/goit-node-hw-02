@@ -5,8 +5,7 @@ const listContacts = async (user, skip, limit, favorite) => {
     favorite ? {
       owner: user,
       favorite
-    } : { owner: user }
-  )
+    } : { owner: user })
     .skip(skip)
     .limit(limit);
 };
@@ -16,14 +15,14 @@ const getContactById = async (contactId, user) => {
     _id: contactId,
     owner: user
   });
-};
+}
 
 const removeContact = async (contactId, user) => {
   return Contacts.findOneAndDelete({
     _id: contactId,
     owner: user
   });
-};
+}
 
 const updateStatusContact = async (contactId, user, body) => {
   return Contacts.findOneAndUpdate(
